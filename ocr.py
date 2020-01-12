@@ -120,10 +120,6 @@ class AipBase(object):
         return True
 
     def _proccessRequest(self, url, params, data, headers):
-        """
-            参数处理
-        """
-
         params['aipSdk'] = 'python'
         params['aipVersion'] = self.__version
 
@@ -144,7 +140,6 @@ class AipBase(object):
             api access auth
         """
 
-        #未过期
         if not refresh:
             tm = self._authObj.get('time', 0) + int(self._authObj.get('expires_in', 0)) - 30
             if tm > int(time.time()):
@@ -256,10 +251,7 @@ class AipBase(object):
         return headers
 
     def report(self, feedback):
-        """
-            数据反馈
-        """
-
+        
         data = {}
         data['feedback'] = feedback
 
@@ -274,16 +266,9 @@ class AipBase(object):
 
 class AipOcr(AipBase):
 
-    """
-    图像识别
-    """
-
     __generalBasicUrl = 'https://aip.baidubce.com/rest/2.0/ocr/v1/general_basic'
 
     def basicGeneral(self, image, options=None):
-        """
-            通用文字识别
-        """
         options = options or {}
 
         data = {}
@@ -294,9 +279,6 @@ class AipOcr(AipBase):
         return self._request(self.__generalBasicUrl, data)
     
     def basicGeneralUrl(self, url, options=None):
-        """
-            通用文字识别
-        """
         options = options or {}
 
         data = {}
